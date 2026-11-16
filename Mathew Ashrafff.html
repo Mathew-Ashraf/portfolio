@@ -1,0 +1,298 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Mathew Ashraf</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a quiet two-column case-file page. The one bold move is the hex dump of the name in the hero; everything else stays plain. */
+:root {
+  --bg: #E9EEF2;
+  --panel: #F6F8FA;
+  --ink: #0F1B25;
+  --muted: #55636F;
+  --line: #C5CFD7;
+  --accent: #0A6F6A;
+  --dump-bg: #0F1B25;
+  --dump-fg: #B9C7D1;
+  --dump-dim: #6C7F8D;
+  --dump-hl: #5EE0D2;
+  --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0B1217; --panel: #111B22; --ink: #E4ECF1; --muted: #8FA0AC; --line: #24333D;
+    --accent: #4CD3C7; --dump-bg: #060B0F; --dump-fg: #A9BAC5; --dump-dim: #5E717F; --dump-hl: #5EE0D2;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0B1217; --panel: #111B22; --ink: #E4ECF1; --muted: #8FA0AC; --line: #24333D;
+  --accent: #4CD3C7; --dump-bg: #060B0F; --dump-fg: #A9BAC5; --dump-dim: #5E717F; --dump-hl: #5EE0D2;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  padding-block: 20px 40px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  -webkit-font-smoothing: antialiased;
+}
+.wrap { max-width: 1080px; margin: 0 auto; display: flex; flex-direction: column; gap: 96px; }
+a { color: inherit; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+::selection { background: var(--accent); color: var(--bg); }
+
+.mono { font-family: var(--font-mono); }
+.label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Top bar */
+.bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
+.mark { font-family: var(--font-display); font-weight: 700; font-size: 18px; letter-spacing: -0.01em; text-decoration: none; }
+.bar nav { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+.bar nav a { font-family: var(--font-mono); font-size: 13px; text-decoration: none; color: var(--muted); }
+.bar nav a:hover { color: var(--ink); }
+
+/* Hero */
+.hero { display: grid; grid-template-columns: minmax(0, 1fr); gap: 48px; align-items: center; padding-top: 24px; }
+.hero-copy { display: flex; flex-direction: column; gap: 24px; align-items: flex-start; min-width: 0; }
+h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(3.4rem, 9vw, 6.6rem);
+  line-height: 0.92;
+  letter-spacing: -0.035em;
+  margin: 0;
+}
+.lede { font-size: 1.2rem; max-width: 36em; margin: 0; color: var(--ink); text-wrap: pretty; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn {
+  font-family: var(--font-mono); font-size: 13px; text-decoration: none;
+  padding: 11px 16px; border: 1px solid var(--ink); border-radius: 3px;
+  transition: background 0.15s, color 0.15s;
+}
+.btn.solid { background: var(--ink); color: var(--bg); }
+.btn.solid:hover { background: var(--accent); border-color: var(--accent); }
+.btn.ghost:hover { background: var(--ink); color: var(--bg); }
+
+
+/* Sections */
+section { display: grid; grid-template-columns: minmax(0, 240px) minmax(0, 1fr); gap: 24px 48px; }
+section > header { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+h2 { font-family: var(--font-display); font-weight: 700; font-size: 1.9rem; line-height: 1.1; letter-spacing: -0.02em; margin: 0; text-wrap: balance; }
+.body { display: flex; flex-direction: column; gap: 28px; min-width: 0; }
+.body p { margin: 0; max-width: 40em; text-wrap: pretty; }
+.muted { color: var(--muted); }
+
+.focus { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 0; list-style: none; }
+.focus li { font-family: var(--font-mono); font-size: 13px; padding: 6px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--panel); }
+
+/* Evidence record */
+.record { background: var(--panel); border: 1px solid var(--line); border-radius: 4px; }
+.record-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 16px; padding: 14px 20px; border-bottom: 1px solid var(--line); }
+.record h3 { font-family: var(--font-display); font-size: 1.6rem; letter-spacing: -0.02em; line-height: 1.15; margin: 0; padding: 20px 20px 4px; }
+.record dl { display: grid; grid-template-columns: 120px minmax(0, 1fr); margin: 0; padding: 12px 20px 8px; }
+.record dt, .record dd { padding: 10px 0; border-top: 1px solid var(--line); margin: 0; }
+.record dt:first-of-type, .record dt:first-of-type + dd { border-top: 0; }
+.record dt { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding-top: 13px; }
+.record .foot { padding: 16px 20px 20px; }
+.status { color: var(--accent); }
+.arrow-link { font-family: var(--font-mono); font-size: 13px; text-decoration: none; border-bottom: 1px solid var(--accent); padding-bottom: 2px; color: var(--ink); }
+.arrow-link:hover { color: var(--accent); }
+
+/* Project list */
+.projects { list-style: none; margin: 0; padding: 0; }
+.projects li { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 6px 24px; padding: 22px 0; border-top: 1px solid var(--line); }
+.projects li:last-child { border-bottom: 1px solid var(--line); }
+.projects h3 { font-family: var(--font-display); font-size: 1.35rem; letter-spacing: -0.015em; line-height: 1.2; margin: 0 0 4px; }
+.projects p { margin: 0; color: var(--muted); max-width: 38em; }
+.projects .tag { padding-top: 5px; }
+.projects .lead h3 { font-size: 1.6rem; }
+.projects .lead p { color: var(--ink); }
+
+/* Contact */
+.links { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.links a { display: grid; grid-template-columns: 130px minmax(0, 1fr) auto; gap: 8px 16px; align-items: baseline; padding: 18px 0; border-top: 1px solid var(--line); text-decoration: none; }
+.links li:last-child a { border-bottom: 1px solid var(--line); }
+.links .where { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; }
+.links .url { font-family: var(--font-mono); font-size: 13px; color: var(--muted); overflow-wrap: anywhere; }
+.links .go { font-family: var(--font-mono); color: var(--accent); transition: transform 0.15s; }
+.links a:hover .go { transform: translateX(4px); }
+.links a:hover .url { color: var(--ink); }
+
+footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; padding-top: 20px; border-top: 1px solid var(--line); }
+
+@media (max-width: 860px) {
+  .wrap { gap: 72px; }
+  .hero { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+  section { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+}
+@media (max-width: 560px) {
+  body { font-size: 16px; }
+  .projects li { grid-template-columns: minmax(0, 1fr); }
+  .projects .tag { padding-top: 0; }
+  .record dl { grid-template-columns: minmax(0, 1fr); }
+  .record dt { border-top: 1px solid var(--line); padding-bottom: 0; }
+  .record dd { border-top: 0; padding-top: 2px; }
+  .record dt:first-of-type { border-top: 0; }
+  .links a { grid-template-columns: minmax(0, 1fr) auto; }
+  .links .url { grid-column: 1 / -1; grid-row: 2; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; }
+}
+</style>
+
+<div class="wrap">
+  <header class="bar">
+    <a class="mark" href="#top">My Portfolio</a>
+    <nav aria-label="Sections">
+      <a href="#about">About</a>
+      <a href="#forensics">Forensics</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="top" style="display:contents">
+    <div class="hero">
+      <div class="hero-copy">
+        <span class="label">Cybersecurity student</span>
+        <h1>Mathew<br>Ashraf</h1>
+        <p class="lede">Ethical hacking, digital forensics and information security. I solve forensics challenges, build projects and write up what I find.</p>
+        <div class="actions">
+          <a class="btn solid" href="#forensics">View forensics work</a>
+          <a class="btn ghost" href="https://tryhackme.com/p/mathewashraf" target="_blank" rel="noopener">TryHackMe profile</a>
+        </div>
+      </div>
+    </div>
+
+    <section id="about">
+      <header>
+        <span class="label">About</span>
+        <h2>Learning to build and break things safely</h2>
+      </header>
+      <div class="body">
+        <p>I am a passionate cybersecurity student with a strong interest in ethical hacking, digital forensics, and information security. I keep developing my technical skills, exploring emerging technologies, and working toward secure digital environments.</p>
+        <ul class="focus" aria-label="Focus areas">
+          <li>Digital forensics</li>
+          <li>Ethical hacking</li>
+          <li>Information security</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="forensics">
+      <header>
+        <span class="label">Digital forensics</span>
+        <h2>Evidence log</h2>
+      </header>
+      <div class="body">
+        <p class="muted">Forensics challenges I have solved. Each entry lists the platform, the kind of evidence, the tools I used and my write-up.</p>
+        <article class="record">
+          <div class="record-head">
+            <span class="label">Challenge record</span>
+            <span class="label status">Solved</span>
+          </div>
+          <h3>Cypher Anxiety</h3>
+          <dl>
+            <dt>Platform</dt><dd>CyberTalents</dd>
+            <dt>Category</dt><dd>Network forensics</dd>
+            <dt>Evidence</dt><dd>Packet capture (pcap)</dd>
+            <dt>Tools</dt><dd>Wireshark</dd>
+          </dl>
+          <div class="foot">
+            <a class="arrow-link" href="https://medium.com/@osamamamoussa/cybertalents-cypheranxiety-write-up-c26c9fb0254d" target="_blank" rel="noopener">Read the write-up &rarr;</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="projects">
+      <header>
+        <span class="label">Projects</span>
+        <h2>Things I have built and tested</h2>
+      </header>
+      <div class="body">
+        <ul class="projects">
+          <li class="lead">
+            <span class="label tag">Platform</span>
+            <div>
+              <h3>Emergency Response Management System</h3>
+              <p>One platform to receive reports, coordinate agencies, and guide rescue teams.</p>
+            </div>
+          </li>
+          <li>
+            <span class="label tag">Application</span>
+            <div>
+              <h3>Airline Ticket Reservation Office</h3>
+              <p>A reservation system for an airline ticket office.</p>
+            </div>
+          </li>
+          <li>
+            <span class="label tag">Security</span>
+            <div>
+              <h3>Malware Detected Alert</h3>
+              <p>A security project built around alerting when malware is detected.</p>
+            </div>
+          </li>
+          <li>
+            <span class="label tag">Web security</span>
+            <div>
+              <h3>Broken Brute-Force Protection</h3>
+              <p>An authentication weakness where brute-force protection is bypassed by sending multiple credentials in a single request.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="contact">
+      <header>
+        <span class="label">Contact</span>
+        <h2>Find me online</h2>
+      </header>
+      <div class="body">
+        <ul class="links">
+          <li>
+            <a href="https://www.linkedin.com/in/mathew-ashraf-" target="_blank" rel="noopener">
+              <span class="where">LinkedIn</span>
+              <span class="url">linkedin.com/in/mathew-ashraf-</span>
+              <span class="go" aria-hidden="true">&rarr;</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://tryhackme.com/p/mathewashraf" target="_blank" rel="noopener">
+              <span class="where">TryHackMe</span>
+              <span class="url">tryhackme.com/p/mathewashraf</span>
+              <span class="go" aria-hidden="true">&rarr;</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span class="label">Mathew Ashraf</span>
+    <span class="label">Cybersecurity &middot; 2026</span>
+  </footer>
+</div>
+
+</body></html>
